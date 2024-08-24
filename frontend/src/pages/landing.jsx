@@ -21,7 +21,7 @@ export default function LandingPage() {
                     <h1><span style={{color: "#FF9839"}}> Connect </span> with your <br/> Loved Ones</h1>
                     <p>Cover Distance by Meet-Up</p>
                     <div role='button'>
-                        <Link to={"/home"}>Get Started</Link>
+                        <Link to={"/auth"}>Get Started</Link>
                     </div>
                 </div>
                 <div>
