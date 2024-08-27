@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Badge, IconButton, TextField, Button } from '@mui/material';
+import io from "socket.io-client";
 
 import '../styles/videoComponent.css';
 
@@ -106,13 +107,19 @@ export default function VideoMeetComponent() {
     useEffect(() => {
         if(video !== undefined && audio !== undefined) {
             getUserMedia();
+            console.log("SET STATE HAS ", video, audio);
         }
-    }, []);
+
+    }, [video, audio]);
+
+    let connectToSocketServer = () => {
+        socketRef.current = io.connect(server_url, { secure: false });
+    }
 
     let getMedia = () => {
         setVideo(videoAvailable);
         setAudio(audioAvailable);
-        // connectToSocketServer();
+        connectToSocketServer();
     }
 
     let connect = () => {
