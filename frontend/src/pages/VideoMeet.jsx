@@ -206,8 +206,14 @@ export default function VideoMeetComponent() {
         }
     }
 
-    let addMessage = () => {
-        
+    let addMessage = (data, sender, socketIdSender) => {
+        setMessages((prevMessages) => [
+            ...prevMessages, 
+            { sender: sender, data: data } 
+        ]);
+        if (socketIdSender !== socketIdRef.current) {
+            setNewMessages((prevNewMessages) => prevNewMessages + 1);
+        }
     }
 
     let connectToSocketServer = () => {
@@ -311,6 +317,14 @@ export default function VideoMeetComponent() {
         setAudio(!audio);
     }
 
+    let handleEndCall = () => {
+        try {
+            let tracks = localVideoRef.current.srcObject.getTracks()
+            tracks.forEach(track => track.stop())
+        } catch (e) { }
+        window.location.href = "/home"
+    }
+
     let getDislayMediaSuccess = (stream) => {
         console.log("HERE")
         try {
@@ -372,6 +386,12 @@ export default function VideoMeetComponent() {
         setScreen(!screen);
     }
 
+    let sendMessage = () => {
+        console.log(socketRef.current);
+        socketRef.current.emit("chat-message", message, username);
+        setMessage("");
+    }
+
 
     return (
         <div>
@@ -394,11 +414,23 @@ export default function VideoMeetComponent() {
                     {showModal ? <div className={styles.chatRoom}>
                          
                         <div className={styles.chatContainer}>
-                           <h2>Chat</h2>
+                           <h1>Chat</h1>
+
+                           <div className={styles.chattingDisplay}>
+                                {messages.length !== 0 ? messages.map((item, index) => {
+                                    
+                                    return (
+                                        <div style={{ marginBottom: "20px" }} key={index}>
+                                            <p style={{ fontWeight: "bold" }}>{item.sender}</p>
+                                            <p>{item.data}</p>
+                                        </div>
+                                    )
+                                    }) : <p>No Messages Yet</p>}
+                           </div>
 
                            <div className={styles.chattingArea}>
                                 <TextField value={message} onChange={(e) => setMessage(e.target.value)} id="outlined-basic" label="Enter Your chat" variant="outlined" style={{padding: "0px 0.9px 10px 0px"}}/>
-                                <Button variant='contained' >Send</Button>
+                                <Button variant='contained' onClick={sendMessage}>Send</Button>
                             </div>
                         </div>
 
@@ -408,7 +440,7 @@ export default function VideoMeetComponent() {
                         <IconButton onClick={handleVideo} style={{ color: "white" }}>
                             {(video === true) ? <VideocamIcon /> : <VideocamOffIcon />}
                         </IconButton>
-                        <IconButton  style={{ color: "red" }}>
+                        <IconButton onClick={handleEndCall} style={{ color: "red" }}>
                             <CallEndIcon  />
                         </IconButton>
                         <IconButton onClick={handleAudio} style={{ color: "white" }}>
