@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import withAuth from '../utils/withAuth'
 import { useNavigate } from "react-router-dom";
 import '../App.css'
@@ -11,7 +11,9 @@ function HomeComponent() {
     let navigate = useNavigate();
     const [meetingCode, setMeetingCode] = useState("");
 
+    const {addToUserHistory} = useContext(AuthContext);
     let handleJoinVideoCall = async () => {
+        await addToUserHistory(meetingCode);
         navigate(`/${meetingCode}`);
     }
 
@@ -19,7 +21,7 @@ function HomeComponent() {
         <>
            <div className="navBar">
               <div style={{ display: "flex", alignItems: "center" }}>
-                 <h2>Meet-Up</h2>
+                 <h1>Meet-Up</h1>
               </div>
 
               <div style={{ display: "flex", alignItems: "center" }}>
