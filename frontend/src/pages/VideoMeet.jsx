@@ -13,7 +13,7 @@ import ChatIcon from '@mui/icons-material/Chat'
 import styles from '../styles/videoComponent.module.css';
 import server from '../environment.js';
 
-const server_url = `${server}`;
+const server_url = `${server.dev}`;
 
 var connections = {};
 
@@ -388,7 +388,7 @@ export default function VideoMeetComponent() {
             let tracks = localVideoref.current.srcObject.getTracks()
             tracks.forEach(track => track.stop())
         } catch (e) { }
-        window.location.href = "/"
+        window.location.href = "/home"
     }
 
     let openChat = () => {
