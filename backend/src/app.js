@@ -6,7 +6,6 @@ import { Server } from "socket.io";
 import { connectToSocket } from "./controllers/socketManager.js";
 
 import userRoutes from "./routes/users.routes.js";
-import envserver from "../env.js";
 
 const app = express();
 const server = createServer(app);
@@ -21,11 +20,11 @@ app.use("/api/v1/users", userRoutes);
 
 const start = async (req, res) => {
     app.set("mongo_user")
-    const connectDB = await mongoose.connect(`${envserver.DB_URL}`);
+    const connectDB = await mongoose.connect(`mongodb+srv://akshanshbhadoria2005:c3Xea5dbaUOsjpB2@meetupcluster.cmwtp.mongodb.net/?retryWrites=true&w=majority&appName=MeetUpCluster`); 
 
     console.log("Connected to DB");
     server.listen(app.get("port"), () => {
-        console.log("Server is listening on port 8000");
+        console.log("Server is listening on port 8000"); 
     });
 }
 
