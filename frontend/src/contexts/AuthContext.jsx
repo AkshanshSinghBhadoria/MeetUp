@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const data = {
-        userData, setUserData, handleRegister, handleLogin, getHistoryOfUser, addToUserHistory
+        userData, setUserData, addToUserHistory, getHistoryOfUser, handleRegister, handleLogin
     }
 
     return (

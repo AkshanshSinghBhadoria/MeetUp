@@ -3,16 +3,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AuthContext } from '../contexts/AuthContext.jsx';
+import { AuthContext } from '../contexts/AuthContext';
 import { Snackbar } from '@mui/material';
 
 
@@ -34,7 +30,7 @@ export default function Authentication() {
 
     const [formState, setFormState] = React.useState(0);
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false)
 
 
     const { handleRegister, handleLogin } = React.useContext(AuthContext);
@@ -43,7 +39,8 @@ export default function Authentication() {
         try {
             if (formState === 0) {
 
-                let result = await handleLogin(username, password);
+                let result = await handleLogin(username, password)
+
 
             }
             if (formState === 1) {
@@ -57,6 +54,7 @@ export default function Authentication() {
                 setPassword("")
             }
         } catch (err) {
+
             console.log(err);
             let message = (err.response.data.message);
             setError(message);
@@ -95,6 +93,7 @@ export default function Authentication() {
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                             <LockOutlinedIcon />
                         </Avatar>
+
 
                         <div>
                             <Button variant={formState === 0 ? "contained" : ""} onClick={() => { setFormState(0) }}>
@@ -161,6 +160,7 @@ export default function Authentication() {
             </Grid>
 
             <Snackbar
+
                 open={open}
                 autoHideDuration={4000}
                 message={message}
