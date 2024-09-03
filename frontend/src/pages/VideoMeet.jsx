@@ -13,7 +13,7 @@ import ChatIcon from '@mui/icons-material/Chat'
 import styles from '../styles/videoComponent.module.css';
 import server from '../environment.js';
 
-const server_url = `${server.prod}`;
+const server_url = server;
 
 var connections = {};
 
