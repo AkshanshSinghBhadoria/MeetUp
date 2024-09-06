@@ -43,9 +43,6 @@ export default function VideoMeetComponent() {
     const videoRef = useRef([])
     let [videos, setVideos] = useState([])
 
-    // if(isChrome === false) {
-
-    // }
 
     useEffect(() => {
         console.log("HELLO")
