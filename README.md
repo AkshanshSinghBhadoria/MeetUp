@@ -18,7 +18,7 @@ Navigate to the backend folder:
 
 Run the following command:
 "npm run dev"
-This will start the backend server.
+ This will start the backend server.
 
 Step 2: Start the Frontend
 Open another terminal in VS Code.
@@ -27,10 +27,10 @@ Navigate to the frontend folder:
 
 Run the following command:
 "npm start"
-This will start the frontend development server and the website will open in your browser.
+ This will start the frontend development server and the website will open in your browser.
 
 📦 Environment & Dependencies :-
 
-✅ No extra environment variables required
+✅ No extra environment variables & Dependencies required
 ✅ All necessary libraries and APIs are already included in the code
 ✅ Works out-of-the-box
